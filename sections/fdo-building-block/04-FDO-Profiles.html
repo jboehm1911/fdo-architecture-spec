@@ -1,10 +1,10 @@
 <p>
   Each <dfn>FDO Profile</dfn> MUST fulfill the following requirements:
 </p>
-An FDO Profile is a template for FDO records:
+An FDO Profile is a template for <a>FDO Record</a>s:
 <ul>
 <li>
-  [R4-1] An FDO profile (short: profile) is a machine-readable template that MAY be instantiated by FDO records. It defines a list of attribute definitions that MUST be contained in any FDO record which instantiates the profile, according to the cardinalities specified in the attribute definitions (see section 5.5, especially [R5-7]). 
+  [R4-1] An FDO profile (short: profile) is a machine-readable template that MAY be instantiated by <a>FDO Record</a>s. It defines a list of attribute definitions that MUST be contained in any <a>FDO Record</a> which instantiates the profile, according to the cardinalities specified in the attribute definitions (see section 5.5, especially [R5-7]). 
   [R4-2] An attribute definition is contained in a profile’s list of attribute definitions (as described in [R4-1]) if and only if the profile contains an attribute, where the attribute’s
   <ul>
     <li>
@@ -19,22 +19,44 @@ An FDO Profile is a template for FDO records:
   [R4-3] Each profile MUST at least contain the mandatory attributes 0.FDO/Type, 0.FDO/Profile, and 0.FDO/Data as defined by the FDO Forum. It can further contain attributes from the list of optional attributes as defined by FDO Forum (see table X in appendix), or community-specified attributes, as long as these are identified by PIDs. 
 </li>
 <li>
-  [R4-4] An FDO record MAY contain additional attributes whose attribute definitions are not listed in the profile it instantiates, although we strongly recommend to avoid this whenever possible.
+  [R4-4] An <a>FDO Record</a> MAY contain additional attributes whose attribute definitions are not listed in the profile it instantiates, although we strongly recommend to avoid this whenever possible.
 </li>
 <li>
-  [R4-5] Each FDO record MUST comply with the profile(s) it instantiates, which means that it successfully validates (see [R8-1]) at least upon creation and update against the profile(s).
+  [R4-5] Each <a>FDO Record</a> MUST comply with the profile(s) it instantiates, which means that it successfully validates (see [R8-1]) at least upon creation and update against the profile(s).
 </li>
 </ul>
 
 The FDO profile definition profile (0.FDO/ProfileDef) is a template for any FDO profile 
 <ul>
 <li>
-  [R4-6] Each profile is itself represented as an FDO. Hence, it is identified by a PID that resolves into an FDO record consisting of attributes.
+  [R4-6] Each profile is itself represented as an FDO. Hence, it is identified by a PID that resolves into an <a>FDO Record</a> consisting of attributes.
 </li>
 <li>
-  [R4-7] The FDO profile definition profile defines a list of attribute definitions that MUST be instantiated in the FDO record of each profile, according to the cardinalities in the attribute definitions (i.e., each profile instantiates the FDO profile definition profile; and the FDO profile definition profile instantiates itself). The FDO profile definition profile is defined by the FDO Forum, has the PID 0.FDO/ProfileDef and contains the list of attribute definitions shown in Table 1. 
+  [R4-7] The FDO profile definition profile defines a list of attribute definitions that MUST be instantiated in the <a>FDO Record</a> of each profile, according to the cardinalities in the attribute definitions (i.e., each profile instantiates the FDO profile definition profile; and the FDO profile definition profile instantiates itself). The FDO profile definition profile is defined by the FDO Forum, has the PID 0.FDO/ProfileDef and contains the list of attribute definitions shown in Table 1. 
 </li>
 <li>
   [R4-8] Any profile and all attribute definitions it contains MUST be defined in open registries. Special rules apply when profiles should be updated, see [R11-3] - [R11-6]. </li>
 </li>
+</ul>
+
+The FDO Root Profile (0.FDO/Root) can be extended to create new FDO profiles.
+Since profiles are defined as lists of attribute definitions, there exists a simple mechanism to extend profiles. The mechanism is defined as follows:
+<ul>
+  <li>
+    [R4-9] The root profile defines a list of attribute definitions that MUST be instantiated in any <a>FDO Record</a> (i.e., any FDO MUST validate against the root profile; and the root profile also validates itself). It is the minimal profile in the sense that it contains the mandatory attribute definitions 0.FDO/Type, 0.FDO/Profile and 0.FDO/Data that must be instantiated in any FDO. The root profile is defined by the FDO Forum, has the PID 0.FDO/Root and contains the list of attribute definitions shown in Table 2. 
+  </li>
+  <li>
+    [R4-10] Profiles SHOULD be extended by other profiles whenever semantically appropriate. The root profile serves as the root of the extension mechanism, that is, any profile MAY be defined as an extension of the root profile or any of its children. 
+  </li>
+  <li>
+    [R4-11] To extend a profile P1 by a profile P2, the profile P2 MUST contain an attribute where
+    <ul>
+      <li>the first element is 0.FDO/ExtendsProfile or the string FDO_Extends_Profile, and</li>
+      <li>the value is the PID identifying P1.</li>
+    </ul>
+    In this case, P2 inherits all attribute definitions listed in P1, as well as all attribute definitions that are listed in profiles that are extended by P1. P2 MAY add further attribute definitions by instantiating 0.FDO/Attribute in its <a>FDO Record</a>. The resulting inheritance hierarchy MUST be conflict-free and representable by a directed acyclic graph.
+  </li>
+  <li>
+    [R4-12] To validate an <a>FDO Record</a> against a profile that uses the extension mechanism, all profiles in the extension hierarchy MUST be resolved until a profile is reached that does not extend another profile (which may be 0.FDO/Root or another profile). 
+  </li>
 </ul>
