@@ -1,20 +1,21 @@
 <p>
-Each FDO record MUST fulfill the following requirements:
+Each FDO Record MUST fulfill the following requirements:
+<dfn>FDO Record</dfn>
 </p>
-An FDO record consists of tuples (called “FDO attributes”)
+An FDO Record consists of tuples (called “FDO attributes”)
 <ul>
 <li>
-  [R3-1] A PID identifying an FDO resolves into a structured information record, called the FDO record.
+  [R3-1] A PID identifying an FDO resolves into a structured information record, called the FDO Record.
 </li>
 <li>
-  [R3-2] The FDO record consists of a finite number of tuples (called FDO attributes, short: attributes) that can be interpreted by a machine. The limit for the number of tuples per record depends on the implementation.
+  [R3-2] The FDO Record consists of a finite number of tuples (called FDO attributes, short: attributes) that can be interpreted by a machine. The limit for the number of tuples per record depends on the implementation.
 </li>
 </ul>
 
-An FDO record MUST the attributes 0.FDO/Type, 0.FDO/Profile and 0.FDO/Data
+A FDO Record MUST contain the attributes 0.FDO/Type, 0.FDO/Profile and 0.FDO/Data
 <ul>
 <li>
-  [R3-3] Each FDO record MUST link to at least one FDO profile (see section 4), which it complies to, via the designated attribute 0.FDO/Profile in its FDO record. To link multiple FDO profiles, the attribute 0.FDO/Profile MAY be repeated multiple times in the FDO record.
+  [R3-3] Each FDO Record MUST link to at least one <a>FDO Profile</a>, which it complies to, via the designated attribute 0.FDO/Profile in its FDO Record. To link multiple FDO profiles, the attribute 0.FDO/Profile MAY be repeated multiple times in the FDO Record.
   <ul>
   <li>
     The first element of such a tuple representing the FDO’s profile is either the PID 0.FDO/Profile, or the string FDO_Profile. 
@@ -25,7 +26,7 @@ An FDO record MUST the attributes 0.FDO/Type, 0.FDO/Profile and 0.FDO/Data
   </ul>
 </li>
 <li>
-  [R3-4] Each FDO MUST specify its FDO type via the designated attribute 0.FDO/Type in its FDO record. To link multiple FDO types, the attribute 0.FDO/Type MAY be repeated multiple times in the FDO record.
+  [R3-4] Each FDO MUST specify its FDO type via the designated attribute 0.FDO/Type in its FDO Record. To link multiple FDO types, the attribute 0.FDO/Type MAY be repeated multiple times in the FDO Record.
   <ul>
   <li>
     The first element of such a tuple representing the FDO’s type is either the PID 0.FDO/Type, or the string FDO_Type. 
@@ -36,7 +37,7 @@ An FDO record MUST the attributes 0.FDO/Type, 0.FDO/Profile and 0.FDO/Data
   </ul>
 </li>
 <li>
-  [R3-5] Each FDO MUST contain the designated attribute 0.FDO/Data in its FDO record at least once. The 0.FDO/Data attribute points to data associated with the FDO. 
+  [R3-5] Each FDO MUST contain the designated attribute 0.FDO/Data in its FDO Record at least once. The 0.FDO/Data attribute points to data associated with the FDO. 
   <ul>
   <li>
   The first element of such a tuple representing the FDO’s data is either the PID 0.FDO/Data, or the string FDO_Data. 
