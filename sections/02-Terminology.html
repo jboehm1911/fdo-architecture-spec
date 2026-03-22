@@ -1,7 +1,7 @@
 <p>
     The following terms are used to describe concepts in this specification and related FDO discussions.
 </p>
-<ul>
+<ul data-sort="ascending">
     <li>
         <b>Abstraction:</b> FDOs support the abstraction principle, i.e., abstracting away details that are not needed
         at the basic object management level. At that level there is no need to distinguish among different types such
@@ -302,5 +302,15 @@
         PID string, some use the PID record and some use extended metadata for these purposes. The choice widely depends
         on efficiency criteria and no general recommendation can be made except that data providers need to make clear
         statements on how versioning is handled.
+    </li>
+    <li>
+        <b>FDO Types</b>: Typing is an essential building block of the FDO concept. The term “type/typing” 
+        refers to several concepts simultaneously:
+        <ul>
+            <li>Attribute definitions are types for properties of an FDO and are instantiated by attributes in the FDO record.</li>
+            <li>The value of the 0.FDO/Type attribute in the FDO record is a type of the resource being represented by the FDO.</li>
+            <li>The value of the 0.FDO/Profile attribute in the FDO record is a type of the FDO record (which instantiates the profile).</li>
+        </ul>
+        All these types together form the FDO type system.
     </li>
 </ul>

@@ -1,31 +1,31 @@
 <p>
-    This section specifies the (declared) FDO Type as the value of the 0.FDO/Type attribute, 
-    which is instantiated in FDO records (2. In above enumeration). This 0.FDO/Type attribute 
-    is an intentionally chosen entry point that signals some default processing semantics for the 
-    FDO. Other facets of the FDO type could be derived independently of the 0.FDO/Type attribute using 
-    other typing mechanisms, e.g., by inspecting the presence of other record attributes (1. and 3. 
-    in above enumeration). Please note that we will refer to the 0.FDO/Type attribute as the “FDO type” 
+    This section specifies the (declared) <dfn>FDO Type</dfn> as the value of the 0.FDO/Type attribute,
+    which is instantiated in FDO records (2. In above enumeration). This 0.FDO/Type attribute
+    is an intentionally chosen entry point that signals some default processing semantics for the
+    FDO. Other facets of the FDO type could be derived independently of the 0.FDO/Type attribute using
+    other typing mechanisms, e.g., by inspecting the presence of other record attributes (1. and 3.
+    in above enumeration). Please note that we will refer to the 0.FDO/Type attribute as the “FDO type”
     in the following.
 </p>
+
 <dl>
-<ul>
-    <li>Purpose of the FDO Type</li>
+     <h3>Purpose of the FDO Type</h3>
     <dt>[R10-1]</dt>
     <dd>
-        0.FDO/Type is a mandatory attribute that MUST be instantiated in each FDO record. 
-        It can be repeated multiple times. It specifies the type of the resource being 
+        0.FDO/Type is a mandatory attribute that MUST be instantiated in each FDO record.
+        It can be repeated multiple times. It specifies the type of the resource being
         represented by the FDO.
     </dd>
     <dt>[R10-2]</dt>
     <dd>
-        The purpose of the 0.FDO/Type attribute is to give a hint to a machine how this 
-        object MAY be processed. 
+        The purpose of the 0.FDO/Type attribute is to give a hint to a machine how this
+        object MAY be processed.
     </dd>
-    <li> The FDO Type of FDOs that belong to the Type System</li>
+    <h3>The FDO Type of FDOs that belong to the Type System</h3>
     <dt>[R10-3]</dt>
     <dd>
-        Profiles, attribute definitions, syntax definitions, and FDOs representing the 
-        FDO type (see [R10-6]) are special FDOs in the sense that they are part of the type system. 
+        Profiles, attribute definitions, syntax definitions, and FDOs representing the
+        FDO type (see [R10-6]) are special FDOs in the sense that they are part of the type system.
         They MUST have the following FDO type:
         <ul>
             <li>A profile has the FDO type “FDO_Profile”.</li>
@@ -34,6 +34,35 @@
             <li>An FDO representing an FDO type has the FDO type “FDO_Type_Definition”.</li>
         </ul>
         Adding additional FDO types to these FDOs is allowed.
-</dd>
-</ul>
+    </dd>
+    <h3>The FDO Type is community defined</h3>
+    <dt>[R10-4]</dt>
+    <dd>Communities of practice MAY define their FDO type(s) according to their needs.</dd>
+    <dt>[R10-5]</dt>
+    <dd>
+        The FDO type SHOULD also be interpretable outside the community of practice to ensure
+        interoperability. This SHOULD be ensured by linking to existing standards or software that explain how to
+        interpret the FDO type. These external resources SHOULD be publicly accessible.
+    </dd>
+    <dt>[R10-6]</dt>
+    <dd>Community-defined FDO type(s) MAY be FDOs for better interpretability.</dd>
+    <dt>[R10-7]</dt>
+    <dd>
+        Types MAY be derived from other types (i.e., there may be hierarchies of types
+        defined within communities of practice). To state that a type t1 is derived from a
+        type t2, the FDO record of t1 SHOULD contain the attribute 0.FDO/DerivedFromType, whose
+        value is a PID that resolves to t2.
+    </dd>
+    <h3>The FDO Type of collections:</h3>
+    FDOs may represent collections of objects (see also section 5.2). 
+    To assign FDO type(s) to a collection and to objects within the collection, 
+    the following conditions apply:
+    <dt>[R10-8]</dt>
+    <dd>The FDO type(s) of a collection MUST describe the collection as a whole.</dd>
+    <dt>[R10-9]</dt>
+    <dd>
+        If an FDO type SHOULD be assigned to objects within the collection, each object MUST 
+        be represented as an FDO itself. This FDO can then contain the 0.FDO/Type attribute to 
+        specify FDO type(s).
+    </dd>
 </dl>
